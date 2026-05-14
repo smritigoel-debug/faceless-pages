@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "elevenlabs": {
+      "command": "npx",
+      "args": ["-y", "@elevenlabs/elevenlabs-mcp@latest"],
+      "env": {
+        "ELEVENLABS_API_KEY": "sk_3fabec7b2447f006463a2e319a6779e853cdf413f854c065"
+      }
+    }
+  }
+}
