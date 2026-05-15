@@ -1,0 +1,140 @@
+[
+  {
+    "id": "cuet_struggle",
+    "type": "static",
+    "hook": "CUET syllabus pahad, sawal ek random.",
+    "caption": "CUET syllabus *pahad*, exam question *tinak*! 🤦‍♀️ Physics ratta, puchenge 'Taj Mahal kisne banaya?' Meri kismat hi aisi hai. 😂📚 Struggle continues. #CUET2026",
+    "hashtags": [
+      "#CUET2026",
+      "#CUETStruggle",
+      "#IndianStudent",
+      "#ExamHumor",
+      "#StudyLife",
+      "#DarkHumor",
+      "#StudentMemes",
+      "#ExamProblems",
+      "#Padhai",
+      "#Syllabus"
+    ],
+    "visual_prompt": "A frustrated Indian student, overwhelmed by a massive pile of textbooks labeled 'CUET Syllabus,' holds a tiny slip of paper with a silly, irrelevant question written on it. The background is a messy study desk in a typical Indian home, filled with scattered notes and empty chai cups, emphasizing the struggle.",
+    "video_script": null,
+    "cta": "Tag a struggling CUETian!"
+  },
+  {
+    "id": "hustle_culture",
+    "type": "static",
+    "hook": "4 AM alarm CEO grindset? Ya fir 4 PM uthna?",
+    "caption": "Bhai, 4 AM uthkar 'CEO grindset' bolta hoon, par actually 4 PM uthta! 😴🛌 Productivity tip: phone off karke so jao. Sab maya hai. #HustleCulture",
+    "hashtags": [
+      "#HustleCulture",
+      "#CEOgrindset",
+      "#Motivation",
+      "#Satire",
+      "#FakeItTillYouMakeIt",
+      "#SleepIsKing",
+      "#Productivity",
+      "#WannabeCEO",
+      "#IndianHumor",
+      "#MorningRoutine"
+    ],
+    "visual_prompt": "A disheveled young man, dressed in a slightly rumpled suit, is seen sprawled comically asleep on an expensive office couch, with a 4 AM alarm clock showing 4 PM next to him. The background features a luxurious, minimalist office space with motivational quotes on the wall, creating a stark contrast to his actual state.",
+    "video_script": null,
+    "cta": "Your actual grind time?"
+  },
+  {
+    "id": "adulting",
+    "type": "static",
+    "hook": "18 ka hua, bills ka jhatka? Manual kahan hai?",
+    "caption": "18 hote hi, 'Welcome to Adulting!' ka board lag gaya. Salary aane se pehle bills ki line! Kahan sikhaya ye sab? Tax, EMI tension. Bas chai aati hai, drama on! ☕💸😂",
+    "hashtags": [
+      "#Adulting",
+      "#18KiUmar",
+      "#BillsBillsBills",
+      "#NoManual",
+      "#LifeCrisis",
+      "#FunnyIndian",
+      "#HinglishHumor",
+      "#GenZStruggles",
+      "#DarkHumor",
+      "#WelcomeToAdulthood"
+    ],
+    "visual_prompt": "A young Indian person (18-20 years old) with a bewildered, slightly stressed expression, sitting at a desk overflowing with various bills (electricity, internet, phone, credit card statements) and a tax form. They are holding a steaming cup of chai with one hand and looking overwhelmed, perhaps a tiny 'Help!' thought bubble above their head. The setting is a cozy but slightly messy Indian room.",
+    "video_script": null,
+    "cta": "Adulting tips, anyone? 🆘"
+  },
+  {
+    "id": "friendship_2026",
+    "type": "static",
+    "hook": "Ghost kiya, meme bheja, besties again. Gen Z Dosti.",
+    "caption": "Teen hafte gayab, phir ek meme tag, aur poori dosti reset! 😂 Gen Z friendships are built different. No drama, just memes & instant reconnection. Besties! 👻💖",
+    "hashtags": [
+      "#GenZFriendship",
+      "#DostiGoals",
+      "#Ghosting",
+      "#MemeLove",
+      "#InstantReconnect",
+      "#BestiesForLife",
+      "#FriendshipGoals",
+      "#IndianGenZ",
+      "#HinglishFun",
+      "#NoDrama"
+    ],
+    "visual_prompt": "Two young Indian Gen Z friends (18-24 years old) laughing joyfully while looking at a phone screen, which displays a hilarious meme. One friend has an arm around the other, and they are in a casual, vibrant setting like a cafe or a park, symbolizing their effortless reconnection despite a recent 'ghosting' period. The atmosphere is lighthearted and full of camaraderie.",
+    "video_script": null,
+    "cta": "Tag your ghosting bestie! 😂"
+  },
+  {
+    "id": "cuet_reel",
+    "type": "reel",
+    "hook": "CUET aspirant ka din: expectations vs reality.",
+    "caption": "Subah 6 baje 'jee jaan laga denge' wali feeling se raat 2 baje 'sab khatam' tak. CUET ki taiyari, ek emotional rollercoaster 😭☕. Kiska din aisa hi guzra?",
+    "hashtags": [
+      "#CUETAspirant",
+      "#ExamStress",
+      "#StudentLife",
+      "#ComedyReel",
+      "#HinglishHumor",
+      "#StudyStruggles",
+      "#ChaiLover",
+      "#RealityCheck",
+      "#EntranceExam",
+      "#Relatable"
+    ],
+    "visual_prompt": "A 9:16 Instagram reel satirizing a CUET aspirant's day. Start with a confident student at 6 AM and end with them crying amidst empty chai cups at 2 AM.",
+    "video_script": [
+      "0-1.5s: Confident student wakes up at 6 AM, full of energy, ready to study.",
+      "1.5-3s: Student at desk, books open, trying to focus but looking overwhelmed.",
+      "3-4.5s: Piles of books and notes, student looking tired, surrounded by empty chai cups.",
+      "4.5-6s: Student staring blankly at ceiling, phone in hand, looking utterly defeated.",
+      "6-8s: Student crying softly at desk, head down, more empty chai cups around."
+    ],
+    "cta": "CUET warriors, relate karte ho?"
+  },
+  {
+    "id": "hustle_reel",
+    "type": "reel",
+    "hook": "Hustle bro ka 24 ghante ka show.",
+    "caption": "Subah 4 baje 'grind never stops' wali post, fir seedha noon tak nap 😴. MacBook pe bas ghoorna, aur khud ko CEO kehna. The ultimate hustle life! 😂💻",
+    "hashtags": [
+      "#HustleCulture",
+      "#EntrepreneurLife",
+      "#FakeItTillYouMakeIt",
+      "#StartupHumor",
+      "#ComedyReel",
+      "#HinglishComedy",
+      "#MotivationMonday",
+      "#WorkLifeBalance",
+      "#CEOVibes",
+      "#Relatable"
+    ],
+    "visual_prompt": "A 9:16 Instagram reel satirizing a 'hustle bro's' typical day. Show him posting early morning motivation, sleeping in, staring blankly at a MacBook, and confidently calling himself a CEO.",
+    "video_script": [
+      "0-1.5s: Guy posting '4 AM grind' caption with a gym selfie, looking intense.",
+      "1.5-3s: Guy immediately crashing back into bed, sleeping soundly till noon.",
+      "3-4.5s: Guy sitting at a cafe, laptop open, scrolling aimlessly or just staring at screen.",
+      "4.5-6s: Guy on a video call, nodding sagely, pretending to be busy and important.",
+      "6-8s: Guy confidently declares 'I am the CEO' to a mirror, flexing bicep."
+    ],
+    "cta": "Aisa hustle bro kiska dost?"
+  }
+]
