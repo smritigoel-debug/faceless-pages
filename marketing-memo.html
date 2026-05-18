@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Marketing Memo — The Next Big Newsletter</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black:   #0A0A0A;
+      --white:   #F5F5F0;
+      --gold:    #C9A84C;
+      --gold-lt: #E8C96A;
+      --gray:    #1A1A1A;
+      --muted:   #5A5A5A;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: rgba(10,10,10,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+
+    .nav-logo {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--white);
+    }
+    .nav-logo span { color: var(--gold); }
+
+    .nav-links {
+      display: flex;
+      gap: 32px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--gold); }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      border: none;
+      padding: 10px 24px;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .nav-cta:hover { background: var(--gold-lt); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 24px 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,168,76,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+
+    .hero-logo-img {
+      width: 240px;
+      height: 240px;
+      object-fit: contain;
+      margin-bottom: 40px;
+      filter: drop-shadow(0 0 40px rgba(201,168,76,0.2));
+    }
+
+    .hero-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(42px, 7vw, 88px);
+      font-weight: 900;
+      line-height: 1.0;
+      letter-spacing: -0.02em;
+      max-width: 900px;
+      margin-bottom: 24px;
+    }
+    .hero-headline em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--muted);
+      max-width: 500px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      border: none;
+      padding: 16px 40px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+    .btn-ghost {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--white);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      padding: 16px 40px;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+    .hero-meta {
+      margin-top: 64px;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      text-transform: uppercase;
+    }
+    .hero-meta strong { color: var(--white); }
+
+    /* ── TICKER ── */
+    .ticker-wrap {
+      overflow: hidden;
+      border-top: 1px solid rgba(201,168,76,0.2);
+      border-bottom: 1px solid rgba(201,168,76,0.2);
+      background: var(--gray);
+      padding: 14px 0;
+    }
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: ticker 30s linear infinite;
+    }
+    .ticker-item {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      padding: 0 40px;
+    }
+    .ticker-item::before { content: '✦  '; }
+    @keyframes ticker {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    /* ── CAROUSEL SECTION ── */
+    .carousel-section {
+      padding: 120px 0;
+      overflow: hidden;
+    }
+
+    .carousel-header {
+      text-align: center;
+      padding: 0 24px;
+      margin-bottom: 64px;
+    }
+
+    .carousel-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(32px, 5vw, 60px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .carousel-sub {
+      font-size: 16px;
+      color: var(--muted);
+      max-width: 440px;
+      margin: 0 auto;
+    }
+
+    .carousel-track-wrap {
+      position: relative;
+      cursor: grab;
+      user-select: none;
+    }
+    .carousel-track-wrap:active { cursor: grabbing; }
+
+    .carousel-track {
+      display: flex;
+      gap: 20px;
+      padding: 0 calc(50vw - 200px);
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .carousel-slide {
+      flex: 0 0 400px;
+      height: 500px;
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+      transition: transform 0.3s, opacity 0.3s;
+      opacity: 0.55;
+      transform: scale(0.94);
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .slide-placeholder {
+      width: 100%;
+      height: 100%;
+      background: var(--gray);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      border: 1px solid rgba(201,168,76,0.1);
+    }
+
+    .slide-placeholder .slide-num {
+      font-size: 48px;
+      font-weight: 900;
+      color: rgba(201,168,76,0.2);
+    }
+
+    .slide-placeholder .slide-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .carousel-controls {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .carousel-btn {
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255,255,255,0.15);
+      background: transparent;
+      color: var(--white);
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .carousel-btn:hover { border-color: var(--gold); color: var(--gold); }
+
+    .carousel-dots {
+      display: flex;
+      gap: 8px;
+    }
+
+    .dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--muted);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .dot.active {
+      background: var(--gold);
+      transform: scale(1.4);
+    }
+
+    /* ── STATS STRIP ── */
+    .stats-strip {
+      padding: 80px 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.06);
+    }
+
+    .stat-item {
+      background: var(--black);
+      padding: 48px 40px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 56px;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ── ABOUT / WHAT IS IT ── */
+    .about-section {
+      padding: 120px 48px;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-left h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 4vw, 56px);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+    .about-left h2 span { color: var(--gold); }
+
+    .about-left p {
+      font-size: 16px;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .feature-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--white);
+    }
+    .feature-list li::before {
+      content: '✦';
+      color: var(--gold);
+      font-size: 10px;
+      margin-top: 3px;
+      flex-shrink: 0;
+    }
+
+    .about-right {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .about-card {
+      background: var(--gray);
+      border: 1px solid rgba(201,168,76,0.1);
+      padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .about-card:hover { border-color: rgba(201,168,76,0.35); }
+    .about-card:nth-child(2) { margin-top: 32px; }
+    .about-card:nth-child(4) { margin-top: -32px; }
+
+    .card-icon {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+    .card-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SUBSCRIBE ── */
+    .subscribe-section {
+      padding: 120px 24px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .subscribe-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 70% 50% at 50% 50%, rgba(201,168,76,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .subscribe-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 900;
+      line-height: 1.1;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+    .subscribe-section h2 em { font-style: italic; color: var(--gold); }
+
+    .subscribe-section p {
+      font-size: 16px;
+      color: var(--muted);
+      margin-bottom: 48px;
+    }
+
+    .subscribe-form {
+      display: flex;
+      max-width: 480px;
+      margin: 0 auto;
+      gap: 0;
+    }
+
+    .subscribe-input {
+      flex: 1;
+      background: var(--gray);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-right: none;
+      color: var(--white);
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      padding: 16px 20px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .subscribe-input:focus { border-color: var(--gold); }
+    .subscribe-input::placeholder { color: var(--muted); }
+
+    .subscribe-btn {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--black);
+      background: var(--gold);
+      border: none;
+      padding: 16px 28px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .subscribe-btn:hover { background: var(--gold-lt); }
+
+    .subscribe-note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 48px;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .footer-brand span { color: var(--gold); }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    .footer-copy {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+      .stats-strip { grid-template-columns: 1fr; }
+      .about-section { grid-template-columns: 1fr; gap: 48px; padding: 80px 24px; }
+      .carousel-track { padding: 0 calc(50vw - 160px); }
+      .carousel-slide { flex: 0 0 320px; height: 400px; }
+      footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <div class="nav-logo">Marketing <span>Memo</span></div>
+    <ul class="nav-links">
+      <li><a href="#carousel">This Week</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#subscribe">Subscribe</a></li>
+    </ul>
+    <button class="nav-cta">Get the Memo</button>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-eyebrow">Issue #001 &bull; May 2026</div>
+    <img
+      class="hero-logo-img"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_39k3deepWbbip5TjcHnk19usXP3/hf_20260518_094707_03d96fc8-5121-4735-8070-d3d80e9d7241.png"
+      alt="Marketing Memo Logo"
+    />
+    <h1 class="hero-headline">
+      The newsletter <em>marketers</em><br/>actually read.
+    </h1>
+    <p class="hero-sub">
+      Sharp takes, real data, and zero fluff — delivered weekly to 50,000+ marketers who stay ahead.
+    </p>
+    <div class="hero-actions">
+      <button class="btn-primary" onclick="document.getElementById('subscribe').scrollIntoView({behavior:'smooth'})">Subscribe Free</button>
+      <a href="#carousel" class="btn-ghost">See This Week's Issue</a>
+    </div>
+    <p class="hero-meta"><strong>50,000+</strong> subscribers &nbsp;&bull;&nbsp; <strong>Weekly</strong> drops &nbsp;&bull;&nbsp; <strong>Free</strong> forever</p>
+  </section>
+
+  <!-- TICKER -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ticker-item">AI Replaces Ad Copywriters</span>
+      <span class="ticker-item">Short-Form Video Dominates</span>
+      <span class="ticker-item">Creator Economy Hits $500B</span>
+      <span class="ticker-item">87% ROI in Short-Form</span>
+      <span class="ticker-item">The Memo Is Here</span>
+      <span class="ticker-item">Marketing Memo Issue #001</span>
+      <span class="ticker-item">AI Replaces Ad Copywriters</span>
+      <span class="ticker-item">Short-Form Video Dominates</span>
+      <span class="ticker-item">Creator Economy Hits $500B</span>
+      <span class="ticker-item">87% ROI in Short-Form</span>
+      <span class="ticker-item">The Memo Is Here</span>
+      <span class="ticker-item">Marketing Memo Issue #001</span>
+    </div>
+  </div>
+
+  <!-- CAROUSEL -->
+  <section class="carousel-section" id="carousel">
+    <div class="carousel-header">
+      <div class="section-label">This Week's Issue</div>
+      <h2 class="carousel-title">Swipe the Memo</h2>
+      <p class="carousel-sub">5 slides. Everything you need to know about marketing this week.</p>
+    </div>
+
+    <div class="carousel-track-wrap" id="carouselWrap">
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="carousel-slide active" data-index="0">
+          <img
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_39k3deepWbbip5TjcHnk19usXP3/hf_20260518_094716_f138d5da-a349-410e-85f2-daffb65f083f.png"
+            alt="Slide 1 — Cover"
+            onerror="this.parentNode.innerHTML=slidePlaceholder('01','Cover')"
+          />
+        </div>
+
+        <div class="carousel-slide" data-index="1">
+          <img
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_39k3deepWbbip5TjcHnk19usXP3/hf_20260518_094720_a16e406f-31b2-472e-b1eb-5bd5a4330983.png"
+            alt="Slide 2 — Trending"
+            onerror="this.parentNode.innerHTML=slidePlaceholder('02','Trending')"
+          />
+        </div>
+
+        <div class="carousel-slide" data-index="2">
+          <img
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_39k3deepWbbip5TjcHnk19usXP3/hf_20260518_094723_dab8b632-7aa6-436b-a185-70da9ad7e190.png"
+            alt="Slide 3 — Stat Spotlight"
+            onerror="this.parentNode.innerHTML=slidePlaceholder('03','Stat')"
+          />
+        </div>
+
+        <div class="carousel-slide" data-index="3">
+          <img
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_39k3deepWbbip5TjcHnk19usXP3/hf_20260518_094731_7c1ddbbe-a830-41e1-959f-52f696a1d253.png"
+            alt="Slide 4 — Hot Take"
+            onerror="this.parentNode.innerHTML=slidePlaceholder('04','Hot Take')"
+          />
+        </div>
+
+        <div class="carousel-slide" data-index="4">
+          <img
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_39k3deepWbbip5TjcHnk19usXP3/hf_20260518_094734_d41b5d26-f0d7-4051-a9cd-f18b648b8edf.png"
+            alt="Slide 5 — Subscribe"
+            onerror="this.parentNode.innerHTML=slidePlaceholder('05','Subscribe')"
+          />
+        </div>
+
+      </div>
+    </div>
+
+    <div class="carousel-controls">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous">&#8592;</button>
+      <div class="carousel-dots" id="dotsContainer">
+        <div class="dot active" data-index="0"></div>
+        <div class="dot" data-index="1"></div>
+        <div class="dot" data-index="2"></div>
+        <div class="dot" data-index="3"></div>
+        <div class="dot" data-index="4"></div>
+      </div>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next">&#8594;</button>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">50K+</div>
+      <div class="stat-label">Weekly Readers</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">87%</div>
+      <div class="stat-label">Open Rate</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">#001</div>
+      <div class="stat-label">Current Issue</div>
+    </div>
+  </div>
+
+  <!-- ABOUT -->
+  <section class="about-section" id="about">
+    <div class="about-left">
+      <div class="section-label">Why Marketing Memo</div>
+      <h2>Built for marketers who <span>don't have time</span> to waste.</h2>
+      <p>Marketing Memo is the weekly briefing that cuts through the noise. No sponsored fluff. No recycled takes. Just the signals that matter, written by people who live and breathe marketing.</p>
+      <p>Every issue is designed first — crafted like an Instagram carousel so it's as easy to skim as it is to deep-dive.</p>
+      <ul class="feature-list">
+        <li>Top 3 trends you need to know this week</li>
+        <li>One stat that changes how you think</li>
+        <li>A hot take worth arguing about</li>
+        <li>The one action to take before next Monday</li>
+      </ul>
+    </div>
+    <div class="about-right">
+      <div class="about-card">
+        <div class="card-icon">⚡</div>
+        <div class="card-title">Instant Value</div>
+        <div class="card-desc">5-minute read. Maximum signal. Every single week, no exceptions.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🎯</div>
+        <div class="card-title">Design-First</div>
+        <div class="card-desc">Every issue is a carousel — built for how marketers actually consume content.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">📊</div>
+        <div class="card-title">Data-Backed</div>
+        <div class="card-desc">Every claim is sourced. No opinions without evidence to back them up.</div>
+      </div>
+      <div class="about-card">
+        <div class="card-icon">🔥</div>
+        <div class="card-title">Hot Takes</div>
+        <div class="card-desc">We say the thing everyone is thinking. No corporate hedging, ever.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SUBSCRIBE -->
+  <section class="subscribe-section" id="subscribe">
+    <div class="section-label">Join the Movement</div>
+    <h2>Get the <em>Memo</em><br/>every week.</h2>
+    <p>Free. No spam. Unsubscribe anytime. No excuses not to.</p>
+    <form class="subscribe-form" onsubmit="handleSubscribe(event)">
+      <input class="subscribe-input" type="email" placeholder="your@email.com" required />
+      <button class="subscribe-btn" type="submit">Subscribe</button>
+    </form>
+    <p class="subscribe-note">Join 50,000+ marketers. Free forever.</p>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Marketing <span>Memo</span></div>
+    <ul class="footer-links">
+      <li><a href="#carousel">Issues</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#subscribe">Subscribe</a></li>
+    </ul>
+    <div class="footer-copy">&copy; 2026 Marketing Memo &mdash; marketingmemo.co</div>
+  </footer>
+
+  <script>
+    // ── Carousel logic
+    const track   = document.getElementById('carouselTrack');
+    const slides  = Array.from(track.querySelectorAll('.carousel-slide'));
+    const dots    = Array.from(document.querySelectorAll('.dot'));
+    const SLIDE_W = 420; // slide width + gap
+    let current   = 0;
+    let isDragging = false, startX = 0, dragDelta = 0;
+
+    function goTo(idx) {
+      slides[current].classList.remove('active');
+      dots[current].classList.remove('active');
+      current = Math.max(0, Math.min(idx, slides.length - 1));
+      slides[current].classList.add('active');
+      dots[current].classList.add('active');
+      track.style.transform = `translateX(${-current * SLIDE_W}px)`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+    dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
+
+    // Drag / swipe
+    const wrap = document.getElementById('carouselWrap');
+    wrap.addEventListener('mousedown', e => { isDragging = true; startX = e.clientX; });
+    wrap.addEventListener('mousemove', e => { if (!isDragging) return; dragDelta = e.clientX - startX; });
+    wrap.addEventListener('mouseup', () => {
+      if (!isDragging) return;
+      isDragging = false;
+      if (dragDelta < -60) goTo(current + 1);
+      else if (dragDelta > 60) goTo(current - 1);
+      dragDelta = 0;
+    });
+    wrap.addEventListener('mouseleave', () => { isDragging = false; dragDelta = 0; });
+
+    wrap.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+    wrap.addEventListener('touchend', e => {
+      const delta = e.changedTouches[0].clientX - startX;
+      if (delta < -60) goTo(current + 1);
+      else if (delta > 60) goTo(current - 1);
+    });
+
+    // Keyboard nav
+    document.addEventListener('keydown', e => {
+      if (e.key === 'ArrowLeft')  goTo(current - 1);
+      if (e.key === 'ArrowRight') goTo(current + 1);
+    });
+
+    // ── Placeholder fallback
+    function slidePlaceholder(num, label) {
+      return `<div class="slide-placeholder"><div class="slide-num">${num}</div><div class="slide-label">${label}</div></div>`;
+    }
+
+    // ── Subscribe form
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const btn = e.target.querySelector('.subscribe-btn');
+      btn.textContent = 'You\'re In ✦';
+      btn.style.background = '#3a9e5f';
+      btn.style.color = '#fff';
+      e.target.querySelector('.subscribe-input').disabled = true;
+    }
+  </script>
+</body>
+</html>
