@@ -29,6 +29,10 @@ HF_BASE        = "https://api.higgsfield.ai/v1"
 
 HEADERS_HF     = {"Authorization": f"Bearer {HF_API_KEY}", "Content-Type": "application/json"}
 
+# Google Drive (optional — set both to enable auto-upload after each run)
+GDrive_SA_PATH    = os.environ.get("GDRIVE_SA_PATH", "service_account.json")
+GDrive_FOLDER_ID  = os.environ.get("GDRIVE_FOLDER_ID", "")
+
 # ---------------------------------------------------------------------------
 # CONTENT THEMES
 # ---------------------------------------------------------------------------
@@ -195,6 +199,48 @@ def poll_job(job_id: str, max_wait: int = 300) -> dict:
 
 
 # ---------------------------------------------------------------------------
+# GOOGLE DRIVE UPLOAD (optional)
+# ---------------------------------------------------------------------------
+
+def upload_to_drive(results: list[dict]) -> list[dict]:
+    """Upload all completed CDN assets to Google Drive. Adds drive_link to each item."""
+    if not GDrive_FOLDER_ID or not os.path.exists(GDrive_SA_PATH):
+        print("[Drive] Skipping upload — GDRIVE_FOLDER_ID or service_account.json not set")
+        return results
+
+    try:
+        from drive_uploader import DriveUploader
+    except ImportError:
+        print("[Drive] drive_uploader.py not found — skipping")
+        return results
+
+    uploader = DriveUploader(GDrive_SA_PATH, GDrive_FOLDER_ID)
+
+    for item in results:
+        cdn_url = (
+            item.get("cdn_url")
+            or (item.get("job_result") or {}).get("results", {}).get("rawUrl")
+        )
+        if not cdn_url:
+            print(f"  [Drive] No CDN URL for {item['id']}, skipping")
+            continue
+
+        content_type = item.get("type", "static")
+        ext = "mp4" if content_type == "reel" else "png"
+        filename = f"{item['id']}.{ext}"
+
+        try:
+            link = uploader.upload_url(cdn_url, filename)
+            item["drive_link"] = link
+            print(f"  [Drive] {filename} → {link}")
+        except Exception as e:
+            print(f"  [Drive] ERROR uploading {filename}: {e}")
+            item["drive_link"] = None
+
+    return results
+
+
+# ---------------------------------------------------------------------------
 # MAIN AGENT LOOP
 # ---------------------------------------------------------------------------
 
@@ -254,8 +300,20 @@ if __name__ == "__main__":
 
     output = run_agent(dry_run=dry)
 
+    # Auto-upload to Google Drive if configured
+    if not dry and GDrive_FOLDER_ID:
+        print("\n=== Uploading to Google Drive ===")
+        output = upload_to_drive(output)
+
     out_file = "agent_run_output.json"
     with open(out_file, "w") as f:
         json.dump(output, f, indent=2)
 
     print(f"\nDone! Results saved to {out_file}")
+
+    # Print Drive links summary if available
+    drive_items = [(r["id"], r.get("drive_link")) for r in output if r.get("drive_link")]
+    if drive_items:
+        print("\n=== Google Drive Links ===")
+        for item_id, link in drive_items:
+            print(f"  {item_id}: {link}")
