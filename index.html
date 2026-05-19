@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kids vs Gravity 😂 | Epic Falls Compilation</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: #0f0f0f;
+      color: #f1f1f1;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* ── Header ── */
+    header {
+      background: #0f0f0f;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid #272727;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    header .logo {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    header .logo span { color: #ff4444; }
+
+    header .tagline {
+      font-size: 13px;
+      color: #aaa;
+    }
+
+    header .sub-btn {
+      margin-left: auto;
+      background: #ff4444;
+      color: #fff;
+      border: none;
+      border-radius: 20px;
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    header .sub-btn:hover { background: #cc2222; }
+
+    /* ── Hero ── */
+    .hero {
+      padding: 40px 20px 20px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(26px, 5vw, 48px);
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: #ff4444;
+    }
+
+    .hero p {
+      margin-top: 10px;
+      color: #aaa;
+      font-size: 15px;
+    }
+
+    .hero .stats {
+      margin-top: 18px;
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+    }
+
+    .hero .stats div { text-align: center; }
+    .hero .stats strong { display: block; font-size: 22px; font-weight: 800; }
+    .hero .stats span { font-size: 12px; color: #888; }
+
+    /* ── Filter bar ── */
+    .filters {
+      display: flex;
+      gap: 10px;
+      padding: 16px 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .filters::-webkit-scrollbar { display: none; }
+
+    .filters button {
+      background: #272727;
+      color: #f1f1f1;
+      border: none;
+      border-radius: 20px;
+      padding: 7px 16px;
+      font-size: 13px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+
+    .filters button.active,
+    .filters button:hover {
+      background: #ff4444;
+      color: #fff;
+    }
+
+    /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 16px;
+      padding: 0 20px 40px;
+    }
+
+    /* ── Card ── */
+    .card {
+      background: #1a1a1a;
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+    }
+
+    .card .thumb {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #272727;
+      overflow: hidden;
+    }
+
+    .card .thumb iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      pointer-events: none;
+    }
+
+    /* Overlay shown before "play" */
+    .card .overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0,0,0,0.35);
+      transition: opacity 0.2s;
+    }
+
+    .card:hover .overlay { opacity: 0; }
+
+    .card .overlay .play-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255,68,68,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .card .overlay .play-icon svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+      margin-left: 4px;
+    }
+
+    .card .badge {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: #ff4444;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .card .duration {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .card .info {
+      padding: 12px 14px 14px;
+    }
+
+    .card .info h3 {
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+
+    .card .meta {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      color: #888;
+    }
+
+    .card .meta .views { font-weight: 600; color: #ccc; }
+
+    .card .reactions {
+      margin-top: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .card .reactions button {
+      background: #272727;
+      border: none;
+      border-radius: 20px;
+      padding: 5px 12px;
+      font-size: 13px;
+      color: #ccc;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .card .reactions button:hover { background: #333; }
+
+    /* ── Modal ── */
+    .modal-bg {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-bg.open { display: flex; }
+
+    .modal {
+      background: #1a1a1a;
+      border-radius: 16px;
+      overflow: hidden;
+      width: 100%;
+      max-width: 800px;
+      position: relative;
+    }
+
+    .modal .video-wrap {
+      aspect-ratio: 16/9;
+      width: 100%;
+    }
+
+    .modal .video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .modal .modal-info {
+      padding: 16px 20px 20px;
+    }
+
+    .modal .modal-info h2 { font-size: 17px; font-weight: 700; }
+
+    .modal .modal-info .modal-meta {
+      margin-top: 6px;
+      font-size: 13px;
+      color: #888;
+    }
+
+    .modal .close-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.7);
+      border: none;
+      border-radius: 50%;
+      width: 36px;
+      height: 36px;
+      font-size: 18px;
+      color: #fff;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+    }
+
+    /* ── Footer ── */
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 12px;
+      color: #555;
+      border-top: 1px solid #272727;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 500px) {
+      .hero .stats { gap: 18px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+  <div class="logo"><span>⚡</span> Kids vs Gravity</div>
+  <div class="tagline">Epic falls, zero chill</div>
+  <button class="sub-btn">Subscribe</button>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <h1>They went for it.<br><em>Gravity won.</em></h1>
+  <p>The funniest kids-falling-while-playing clips on the internet — curated weekly.</p>
+  <div class="stats">
+    <div><strong>2.4M</strong><span>Total views</span></div>
+    <div><strong>340+</strong><span>Clips</span></div>
+    <div><strong>98%</strong><span>Kids fine 😅</span></div>
+  </div>
+</section>
+
+<!-- Filters -->
+<div class="filters">
+  <button class="active" onclick="filterCards('all', this)">All</button>
+  <button onclick="filterCards('playground', this)">Playground</button>
+  <button onclick="filterCards('bike', this)">Bikes & Scooters</button>
+  <button onclick="filterCards('sports', this)">Sports</button>
+  <button onclick="filterCards('trampoline', this)">Trampoline</button>
+  <button onclick="filterCards('snow', this)">Snow & Slides</button>
+</div>
+
+<!-- Grid -->
+<div class="grid" id="grid"></div>
+
+<!-- Modal -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal" id="modal">
+    <button class="close-btn" onclick="closeModal()">✕</button>
+    <div class="video-wrap">
+      <iframe id="modalIframe" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+    </div>
+    <div class="modal-info">
+      <h2 id="modalTitle"></h2>
+      <div class="modal-meta" id="modalMeta"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer>
+  Kids vs Gravity · All clips are public UGC · No kids were seriously harmed 😂
+</footer>
+
+<script>
+  const clips = [
+    {
+      id: "TjpEQCE00xw",
+      title: "Kid Attempts Mega Jump Off Swing — Sticks the Landing… Sort Of",
+      views: "1.2M",
+      age: "2 days ago",
+      duration: "0:28",
+      tag: "playground",
+      badge: "🔥 Trending",
+    },
+    {
+      id: "dQw4w9WgXcQ",
+      title: "Scooter vs Curb — Scooter Wins Every Time 😂",
+      views: "840K",
+      age: "5 days ago",
+      duration: "0:15",
+      tag: "bike",
+    },
+    {
+      id: "9bZkp7q19f0",
+      title: "Trampoline Backflip Attempt Goes Exactly as Expected",
+      views: "620K",
+      age: "1 week ago",
+      duration: "0:22",
+      tag: "trampoline",
+      badge: "NEW",
+    },
+    {
+      id: "kJQP7kiw5Fk",
+      title: "Sledding into a Snowbank at Full Speed — Kid is Fine, Hat is Not",
+      views: "511K",
+      age: "2 weeks ago",
+      duration: "0:31",
+      tag: "snow",
+    },
+    {
+      id: "OPf0YbXqDm0",
+      title: "Soccer Goal Celebration Goes Terribly Wrong",
+      views: "399K",
+      age: "3 weeks ago",
+      duration: "0:18",
+      tag: "sports",
+    },
+    {
+      id: "60ItHLz5WEA",
+      title: "Playground Monkey Bars: Mission Impossible Edition",
+      views: "278K",
+      age: "1 month ago",
+      duration: "0:12",
+      tag: "playground",
+    },
+  ];
+
+  let activeTag = "all";
+
+  function renderGrid(tag) {
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+    const filtered = tag === "all" ? clips : clips.filter(c => c.tag === tag);
+
+    filtered.forEach(clip => {
+      const card = document.createElement("div");
+      card.className = "card";
+      card.dataset.tag = clip.tag;
+
+      card.innerHTML = `
+        <div class="thumb">
+          <img
+            src="https://i.ytimg.com/vi/${clip.id}/hqdefault.jpg"
+            alt="${clip.title}"
+            style="width:100%;height:100%;object-fit:cover;"
+            onerror="this.style.background='#333';this.style.display='block';"
+          />
+          <div class="overlay">
+            <div class="play-icon">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+            </div>
+          </div>
+          ${clip.badge ? `<span class="badge">${clip.badge}</span>` : ""}
+          <span class="duration">${clip.duration}</span>
+        </div>
+        <div class="info">
+          <h3>${clip.title}</h3>
+          <div class="meta">
+            <span class="views">${clip.views} views</span>
+            <span>${clip.age}</span>
+          </div>
+          <div class="reactions">
+            <button>😂 LOL</button>
+            <button>😬 Oof</button>
+            <button>🔁 Share</button>
+          </div>
+        </div>
+      `;
+
+      card.querySelector(".thumb").addEventListener("click", () => openModal(clip));
+      grid.appendChild(card);
+    });
+  }
+
+  function filterCards(tag, btn) {
+    activeTag = tag;
+    document.querySelectorAll(".filters button").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderGrid(tag);
+  }
+
+  function openModal(clip) {
+    document.getElementById("modalIframe").src =
+      `https://www.youtube.com/embed/${clip.id}?autoplay=1&rel=0`;
+    document.getElementById("modalTitle").textContent = clip.title;
+    document.getElementById("modalMeta").textContent =
+      `${clip.views} views · ${clip.age}`;
+    document.getElementById("modalBg").classList.add("open");
+  }
+
+  function closeModal(e) {
+    if (e && e.target !== document.getElementById("modalBg")) return;
+    document.getElementById("modalBg").classList.remove("open");
+    document.getElementById("modalIframe").src = "";
+  }
+
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape") closeModal();
+  });
+
+  renderGrid("all");
+</script>
+</body>
+</html>
